@@ -1,0 +1,215 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Customer API",
+        "description": "Customer API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/customer": {
+            "post": {
+                "description": "Register new customer",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "examples": {
+                                "stephen": {
+                                    "description": "Login Stephen Customer",
+                                    "value": {
+                                        "first_name": "Stephen",
+                                        "last_name": "Malik",
+                                        "email": "stephen@gmail.com",
+                                        "password": "password",
+                                        "address": "Jl Arjuno gg 3 , 1149",
+                                        "phone": "0895620108861"
+                                    }
+                                }
+                            },
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "first_name",
+                                    "email",
+                                    "password",
+                                    "address",
+                                    "phone"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success register customer",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "Success": {
+                                        "description": "Success Register Customer",
+                                        "value": {
+                                            "data": {
+                                                "id": "1",
+                                                "first_name": "Stephen",
+                                                "last_name": "Malik",
+                                                "email": "stephen@gmail.com",
+                                                "password": "password",
+                                                "address": "Jl Arjuno gg 3 , 1149",
+                                                "phone": "0895620108861"
+                                            }
+                                        }
+                                    }
+                                },
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "first_name": {
+                                                    "type": "string"
+                                                },
+                                                "last_name": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "password": {
+                                                    "type": "string"
+                                                },
+                                                "address": {
+                                                    "type": "string"
+                                                },
+                                                "phone": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/customer/login": {
+            "post": {
+                "description": "Login Customer",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "first_name": {
+                                                    "type": "string"
+                                                },
+                                                "token": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/customer/logout": {
+            "delete": {
+                "description": "Logout current customer",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success logout customer",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "boolean"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
