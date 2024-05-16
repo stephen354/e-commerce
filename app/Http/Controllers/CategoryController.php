@@ -2,65 +2,89 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryCreateRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function create(CategoryCreateRequest $request)
     {
-        //
+        $data = $request->validated();
+        $this->responseCategoryAlready($data);
+        $category = new Category($data);
+        $category->save();
+
+        return $this->success($category);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show()
     {
-        //
+        $category = Category::query()->get();
+        $this->CategoryNotFound($category);
+        return $category;
+    }
+    public function get(int $id)
+    {
+        $category = Category::where('id', $id)->first();
+        $this->CategoryNotFound($category);
+        return $category;
+    }
+    public function update(int $id, CategoryUpdateRequest $request)
+    {
+        $category = Category::where('id', $id)->first();
+        $this->CategoryNotFound($category);
+        $data = $request->validated();
+        $this->responseCategoryAlready($data);
+        $category->fill($data);
+        $category->save();
+
+        return $this->success($category);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCategoryRequest $request)
+    public function delete(int $id)
     {
-        //
+        $category = Category::where('id', $id)->first();
+        $this->CategoryNotFound($category);
+
+        $category->delete();
+        return response()->json([
+            'data' => true
+        ])->setStatusCode(200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
+    private function success($data)
     {
-        //
+        return throw new HttpResponseException(response([
+            $data
+        ]));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
+    private function responseCategoryAlready($data)
     {
-        //
+        if (Category::where('category', $data['category'])->count() == 1) {
+            throw new HttpResponseException(response([
+                "errors" => [
+                    "category" => [
+                        "category already created"
+                    ]
+                ]
+            ]), 400);
+        }
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    private function CategoryNotFound($data)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Category $category)
-    {
-        //
+        if (!$data) {
+            throw new HttpResponseException(response([
+                "errors" => [
+                    "message" => [
+                        "not found"
+                    ]
+                ]
+            ]), 404);
+        }
     }
 }

@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://api.server.test/v1"
+            "url": "https://localhost:8000"
         }
     ],
     "paths": {
