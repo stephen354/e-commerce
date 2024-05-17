@@ -32,6 +32,13 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::delete('/cart/{id}', [CartController::class, 'delete'])->where('id', '[0-9]+');
 
     Route::post('/checkout', [PaymentController::class, 'create']);
+    Route::delete('/checkout', [PaymentController::class, 'delete']);
+    Route::get('/payment/show/{id}', [PaymentController::class, 'getPayment'])->where('id', '[0-9]+');
+    Route::put('/payment/cancelorder/{id}', [PaymentController::class, 'cancelOrder'])->where('id', '[0-9]+');
+    Route::post('/payment/updatebayar/{id}', [PaymentController::class, 'updateBayar'])->where('id', '[0-9]+');
+    Route::put('/payment/updatekemas/{id}', [PaymentController::class, 'updateKemas'])->where('id', '[0-9]+');
+    Route::put('/payment/updatekirim/{id}', [PaymentController::class, 'updateKirim'])->where('id', '[0-9]+');
+    Route::put('/payment/selesai/{id}', [PaymentController::class, 'updateSelesai'])->where('id', '[0-9]+');
 });
 Route::post('/customer', [CustomerController::class, 'register']);
 Route::post('/customer/login', [CustomerController::class, 'login']);

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('payment', function (Blueprint $table) {
             $table->id();
             $table->date('payment_date')->nullable(false);
-            $table->double('amount')->nullable(false);
+            $table->double('amount')->nullable();
             $table->string('token', 100)->nullable()->unique('payment_token_unique');
             $table->string('status', 50);
             $table->unsignedBigInteger('customer_id')->nullable(false);
