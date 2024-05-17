@@ -15,7 +15,9 @@ class Rating extends Model
     public $incrementing = true;
 
     protected $fillable = [
-        'rate'
+        'order_id',
+        'rate',
+        'customer_id'
     ];
 
     public function customer(): BelongsTo

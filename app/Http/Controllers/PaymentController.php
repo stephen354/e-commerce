@@ -107,7 +107,7 @@ class PaymentController extends Controller
         $payment = DB::table('order')
             ->leftJoin('product', 'product.id', '=', 'order.product_id')
             ->leftJoin('payment', 'payment.id', '=', 'order.payment_id')
-            ->select('product.*', 'order.*', 'payment.*', 'payment.id')
+            ->select('product.*', 'order.*', 'payment.*', 'order.id')
             ->where('payment.id', $id)
             ->where('payment.customer_id', $customer->id)
             ->get();

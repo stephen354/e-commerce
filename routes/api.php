@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RatingController;
 use App\Http\Middleware\ApiAuthMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,8 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::put('/payment/updatekemas/{id}', [PaymentController::class, 'updateKemas'])->where('id', '[0-9]+');
     Route::put('/payment/updatekirim/{id}', [PaymentController::class, 'updateKirim'])->where('id', '[0-9]+');
     Route::put('/payment/selesai/{id}', [PaymentController::class, 'updateSelesai'])->where('id', '[0-9]+');
+
+    Route::post('/payment/rating', [RatingController::class, 'create']);
 });
 Route::post('/customer', [CustomerController::class, 'register']);
 Route::post('/customer/login', [CustomerController::class, 'login']);

@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CartCreateRequest extends FormRequest
+class RatingCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class CartCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'quantity' => ['required', 'integer'],
-            'product_id' => ['required'],
-            'customer_id' => ['nullable']
+            "order_id" => ['required',],
+            "rate" => ['required',],
+            "customer_id" => ['nullable']
         ];
     }
     protected function failedValidation(Validator $validator)
