@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('price')->nullable(false);
             $table->integer('stock')->nullable(false);
+            $table->float('rate')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
 

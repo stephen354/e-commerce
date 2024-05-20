@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PaymentCreateRequest;
+use App\Http\Requests\PaymentUpdateRequest;
 use App\Models\Payment;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
@@ -24,6 +25,8 @@ class PaymentController extends Controller
         $customer = Auth::user();
         $data = $request->validated();
         $amount = 0;
+
+        $customer->id = $data['customer_id'];
         // -------------- validasi pesanan -----------
         $count_payment = Payment::where('customer_id', $customer->id)->where('status', "menunggu pembayaran")->count();
         if ($count_payment) {
@@ -57,7 +60,7 @@ class PaymentController extends Controller
                 ->where('customer_id', $customer->id)
                 ->first();
 
-
+            $this->checkoutFailed($cart, $payment);
             $data_order = [
                 "quantity" => $cart->quantity,
                 "price" => $cart->price * $cart->quantity,
@@ -78,29 +81,29 @@ class PaymentController extends Controller
         $payment->fill($data_payment);
         $payment->save();
 
-        return $this->show();
+        return $this->show($payment['customer_id']);
     }
 
-    public function delete()
+    public function delete(int $id)
     {
         $customer = Auth::user();
-        $payment = Payment::where('customer_id', $customer->id)->first();
+        $payment = Payment::where('customer_id', $customer->id)->where('id', $id)->first();
         $payment->delete();
     }
-
-    private function show()
+    //payment all order
+    private function show(int $id)
     {
-        $customer = Auth::user();
+        Auth::user();
         $payment_return = DB::table('order')
             ->leftJoin('product', 'product.id', '=', 'order.product_id')
             ->leftJoin('payment', 'payment.id', '=', 'order.payment_id')
             ->select('order.*', 'product.name', 'payment.payment_date', 'payment.customer_id')
             ->where('payment.status', "menunggu pembayaran")
-            ->where('payment.customer_id', $customer->id)
+            ->where('payment.customer_id', $id)
             ->get();
         return $payment_return;
     }
-
+    // show order all order
     public function getPayment($id)
     {
         $customer = Auth::user();
@@ -113,12 +116,22 @@ class PaymentController extends Controller
             ->get();
         return $payment;
     }
-
-    public function cancelOrder($id)
+    // show all payment berdasarkan customer_id
+    public function allpayment(int $id)
     {
         $customer = Auth::user();
-        $payment = Payment::where('id', $id)
-            ->where('customer_id', $customer->id)
+        $payment = DB::table('payment')
+            ->where('payment.customer_id', $id)
+            ->get();
+        return $payment;
+    }
+
+    public function cancelOrder(PaymentUpdateRequest $request)
+    {
+        $data = $request->validated();
+        Auth::user();
+        $payment = Payment::where('id', $data['id'])
+            ->where('customer_id', $data['customer_id'])
             ->where('status', "menunggu pembayaran")
             ->first();
         $data = [
@@ -131,15 +144,15 @@ class PaymentController extends Controller
         return $payment;
     }
 
-    public function updateBayar(int $id)
+    public function updateBayar(PaymentUpdateRequest $request)
     {
-        $customer = Auth::user();
-
+        Auth::user();
+        $data = $request->validated();
         $product = DB::table('order')
             ->leftJoin('product', 'product.id', '=', 'order.product_id')
             ->leftJoin('payment', 'payment.id', '=', 'order.payment_id')
             ->select('order.quantity', 'product.*')
-            ->where('payment.id', $id)
+            ->where('payment.id', $data['id'])
             ->get();
 
         $this->ProductNotFound($product);
@@ -157,6 +170,29 @@ class PaymentController extends Controller
                 ]), 400);
             }
         }
+        //----------- add token  
+        $cekBayar = Payment::where('customer_id', $data['customer_id'])->where('status', "Diterima")->where('id', $data['id'])->first();
+        if ($cekBayar) {
+            throw new HttpResponseException(response([
+                "errors" => [
+                    "message" => [
+                        "Sudah Dibayar"
+                    ]
+                ]
+            ]), 404);
+        }
+        $payment = Payment::where('customer_id', $data['customer_id'])
+            ->where('status', "menunggu pembayaran")
+            ->where('id', $data['id'])
+            ->first();
+        $data = [
+            "status" => "Diterima",
+            "token" => (string) Str::uuid()
+        ];
+        $this->ProductNotFound($payment);
+
+        $payment->fill($data);
+        $payment->save();
         //---------- kurangi stock
         foreach ($product as $p) {
             $stock = Product::where('id', $p->id)->first();
@@ -167,25 +203,14 @@ class PaymentController extends Controller
             $stock->save();
         }
 
-
-        //----------- add token
-        $payment = Payment::where('customer_id', $customer->id)->where('status', "menunggu pembayaran")->first();
-        $data = [
-            "status" => "Diterima",
-            "token" => (string) Str::uuid()
-        ];
-        $this->ProductNotFound($payment);
-        $payment->fill($data);
-        $payment->save();
-
-
         return $payment;
     }
-    public function updateKemas(int $id)
+    public function updateKemas(PaymentUpdateRequest $request)
     {
-        $customer = Auth::user();
-        $payment = Payment::where('id', $id)
-            ->where('customer_id', $customer->id)
+        Auth::user();
+        $data = $request->validated();
+        $payment = Payment::where('id', $data['id'])
+            ->where('customer_id', $data['customer_id'])
             ->where('status', "Diterima")
             ->first();
         $this->ProductNotFound($payment);
@@ -197,11 +222,12 @@ class PaymentController extends Controller
 
         return $payment;
     }
-    public function updatekirim(int $id)
+    public function updatekirim(PaymentUpdateRequest $request)
     {
-        $customer = Auth::user();
-        $payment = Payment::where('id', $id)
-            ->where('customer_id', $customer->id)
+        Auth::user();
+        $data = $request->validated();
+        $payment = Payment::where('id', $data['id'])
+            ->where('customer_id', $data['customer_id'])
             ->where('status', "Dikemas")
             ->first();
         $this->ProductNotFound($payment);
@@ -213,11 +239,12 @@ class PaymentController extends Controller
 
         return $payment;
     }
-    public function updateSelesai(int $id)
+    public function updateSelesai(PaymentUpdateRequest $request)
     {
-        $customer = Auth::user();
-        $payment = Payment::where('id', $id)
-            ->where('customer_id', $customer->id)
+        Auth::user();
+        $data = $request->validated();
+        $payment = Payment::where('id', $data['id'])
+            ->where('customer_id', $data['customer_id'])
             ->where('status', "Dikirim")
             ->first();
         $this->ProductNotFound($payment);
@@ -237,6 +264,21 @@ class PaymentController extends Controller
                 "errors" => [
                     "message" => [
                         "not found"
+                    ]
+                ]
+            ]), 404);
+        }
+    }
+    private function checkoutFailed($data, $payment)
+    {
+        if (!$data) {
+            $payment = Payment::where('id', $payment['id'])
+                ->where('status', "menunggu pembayaran")->first();
+            $payment->delete();
+            throw new HttpResponseException(response([
+                "errors" => [
+                    "message" => [
+                        "Payment Failed - Product Not Found - Please create product on cart"
                     ]
                 ]
             ]), 404);

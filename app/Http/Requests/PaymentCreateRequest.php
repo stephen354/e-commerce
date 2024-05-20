@@ -27,6 +27,7 @@ class PaymentCreateRequest extends FormRequest
         return [
 
             "product_id" => ['required', 'array'],
+            "customer_id" => ['nullable']
         ];
     }
 

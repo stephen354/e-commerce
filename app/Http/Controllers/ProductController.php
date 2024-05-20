@@ -44,6 +44,24 @@ class ProductController extends Controller
         return $product;
     }
 
+    public function showRating($id)
+    {
+        $rating = DB::table('rating')
+            ->leftJoin('order', 'order.id', '=', 'rating.order_id')
+            //     // ->leftJoin('product', 'product.id', '=', 'order.product_id')
+            ->where('order.id', $id)
+            ->first();
+        $this->ProductNotFound($rating);
+        $i = 1;
+        $rate = 0;
+        foreach ($rating as $r) {
+            $i++;
+            $rate += $r->rate;
+        }
+        $rate = $rate / $i - 1;
+        return $rate;
+    }
+
     public function get(int $id)
     {
         $product = $product = DB::table('product')
