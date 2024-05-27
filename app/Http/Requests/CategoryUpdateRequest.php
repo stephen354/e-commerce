@@ -24,7 +24,8 @@ class CategoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ['required', "max:100"]
+            "id" => ['required', "integer"],
+            "category" => ['required', "max:100"]
         ];
     }
     protected function failedValidation(Validator $validator)

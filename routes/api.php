@@ -24,27 +24,27 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::middleware(ApiAuthMiddleware::class)->group(function () {
-    Route::delete('/customer/logout', [CustomerController::class, 'logout']);
+// Route::middleware(ApiAuthMiddleware::class)->group(function () {
+Route::delete('/customer/logout/{email}', [CustomerController::class, 'logout']);
 
-    Route::post('/cart', [CartController::class, 'create']);
-    Route::get('/cart/{id}', [CartController::class, 'cart'])->where('id', '[0-9]+');
-    Route::get('/cart/product/{id}', [CartController::class, 'get'])->where('id', '[0-9]+');
-    Route::delete('/cart/{id}', [CartController::class, 'delete'])->where('id', '[0-9]+');
+Route::post('/cart', [CartController::class, 'create']);
+Route::get('/cart/{id}', [CartController::class, 'cart'])->where('id', '[0-9]+');
+Route::get('/cart/product/{id}', [CartController::class, 'get'])->where('id', '[0-9]+');
+Route::delete('/cart/{id}', [CartController::class, 'delete'])->where('id', '[0-9]+');
 
-    Route::post('/checkout', [PaymentController::class, 'create']);
-    Route::delete('/checkout/{id}', [PaymentController::class, 'delete'])->where('id', '[0-9]+');
-    Route::get('/payment/show/{id}', [PaymentController::class, 'getPayment'])->where('id', '[0-9]+');
-    Route::put('/payment/cancelorder', [PaymentController::class, 'cancelOrder']);
-    Route::post('/payment/updatebayar', [PaymentController::class, 'updateBayar']);
-    Route::put('/payment/updatekemas', [PaymentController::class, 'updateKemas']);
-    Route::put('/payment/updatekirim', [PaymentController::class, 'updateKirim']);
-    Route::put('/payment/selesai', [PaymentController::class, 'updateSelesai']);
+Route::post('/payment', [PaymentController::class, 'create']);
+Route::delete('/payment/{id}', [PaymentController::class, 'delete'])->where('id', '[0-9]+');
+Route::get('/payment/show/{id}', [PaymentController::class, 'getPayment'])->where('id', '[0-9]+');
+Route::put('/payment/cancelorder', [PaymentController::class, 'cancelOrder']);
+Route::post('/payment/updatebayar', [PaymentController::class, 'updateBayar']);
+Route::put('/payment/updatekemas', [PaymentController::class, 'updateKemas']);
+Route::put('/payment/updatekirim', [PaymentController::class, 'updateKirim']);
+Route::put('/payment/selesai', [PaymentController::class, 'updateSelesai']);
 
-    Route::get('/payment/{id}', [PaymentController::class, 'allpayment'])->where('id', '[0-9]+');
+Route::get('/payment/{id}', [PaymentController::class, 'allpayment'])->where('id', '[0-9]+');
 
-    Route::post('/payment/rating', [RatingController::class, 'create']);
-});
+Route::post('/payment/rating', [RatingController::class, 'create']);
+// });
 Route::post('/customer', [CustomerController::class, 'register']);
 Route::post('/customer/login', [CustomerController::class, 'login']);
 
@@ -59,5 +59,5 @@ Route::get('/product/category/{category}', [ProductController::class, 'byCategor
 Route::post('/category', [CategoryController::class, 'create']);
 Route::get('/category', [CategoryController::class, 'show']);
 Route::get('/category/{id}', [CategoryController::class, 'get'])->where('id', '[0-9]+');
-Route::put('/category/{id}', [CategoryController::class, 'update'])->where('id', '[0-9]+');
+Route::put('/category', [CategoryController::class, 'update']);
 Route::delete('/category/{id}', [CategoryController::class, 'delete'])->where('id', '[0-9]+');

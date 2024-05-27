@@ -1,0 +1,2060 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Open API - E Commerce",
+        "description": "L5 Swagger OpenApi description",
+        "contact": {
+            "email": "darius@matulionis.lt"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0",
+        "x-logo": {
+            "url": "https://via.placeholder.com/190x90.png?text=L5-Swagger"
+        }
+    },
+    "paths": {
+        "/cart": {
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Create new Product in cart",
+                "description": "Create new Product in cart",
+                "operationId": "01e496f11ad9aa4e64b259bf4ae7e41d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "product_id": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "customer_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "quantity": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "product_id": {
+                                            "type": "integer",
+                                            "example": "2"
+                                        },
+                                        "customer_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/cart/product/{Id}": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Find Product in cart by ID",
+                "description": "Returns a single product",
+                "operationId": "85dec63deef1576c54c43259ed7dd98e",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Cart",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Samsung S24"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "samsung memiliki ....."
+                                        },
+                                        "price": {
+                                            "type": "integer",
+                                            "example": "34000000"
+                                        },
+                                        "stock": {
+                                            "type": "integer",
+                                            "example": "8"
+                                        },
+                                        "rate": {
+                                            "type": "integer",
+                                            "example": "5"
+                                        },
+                                        "category_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "category": {
+                                            "type": "integer",
+                                            "example": "Samsung"
+                                        },
+                                        "quantity": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplier"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
+        "/cart/{Id}": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Show Product in Cart by Customer",
+                "description": "Show Product in Cart by Customer",
+                "operationId": "b0842247d9ef48e768d7c01a29fd57c2",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Customer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "data",
+                                    "type": "array",
+                                    "items": {
+                                        "title": "data[0]",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1"
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Samsung S24"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "samsung memiliki ....."
+                                            },
+                                            "price": {
+                                                "type": "integer",
+                                                "example": "34000000"
+                                            },
+                                            "stock": {
+                                                "type": "integer",
+                                                "example": "8"
+                                            },
+                                            "rate": {
+                                                "type": "integer",
+                                                "example": "5"
+                                            },
+                                            "category_id": {
+                                                "type": "integer",
+                                                "example": "1"
+                                            },
+                                            "category": {
+                                                "type": "string",
+                                                "example": "Samsung"
+                                            },
+                                            "quantity": {
+                                                "type": "integer",
+                                                "example": "1"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": "1",
+                                        "name": "Samsung S24",
+                                        "description": "Samsung S24 memiliki...",
+                                        "price": "3000000",
+                                        "stock": "10",
+                                        "rate": "4",
+                                        "category_id": "1",
+                                        "category": "Samsung",
+                                        "quantity": "2"
+                                    },
+                                    {
+                                        "id": "2",
+                                        "name": "Samsung S23",
+                                        "description": "Samsung S23 memiliki...",
+                                        "price": "2800000",
+                                        "stock": "10",
+                                        "rate": "4",
+                                        "category_id": "1",
+                                        "category": "Samsung",
+                                        "quantity": "2"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplier"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Delete Product in Cart by ID",
+                "description": "Delete a single product",
+                "operationId": "d3ae644f6a55e929e66706ac00769fc5",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Cart",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplier"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
+        "/category": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Show list category",
+                "description": "Show list category",
+                "operationId": "a334a25403599785bfcd67ca446e9185",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "data",
+                                "type": "array",
+                                "items": {
+                                    "title": "data[0]",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "category": {
+                                            "type": "string",
+                                            "example": "Samsung"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "example": [
+                                {
+                                    "id": "1",
+                                    "category": "Samsung"
+                                },
+                                {
+                                    "id": "2",
+                                    "category": "oppo"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "data",
+                                    "type": "array",
+                                    "items": {
+                                        "title": "data[0]",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1"
+                                            },
+                                            "category": {
+                                                "type": "string",
+                                                "example": "Samsung"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Update category",
+                "description": "Update a new category",
+                "operationId": "5b5f8d2ec9d116166282eb5156ee887a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "Samsung"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "category": {
+                                            "type": "string",
+                                            "example": "Samsung"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Create new category",
+                "description": "Create a new category",
+                "operationId": "9311e3da298714caf0fbfcd074cb2287",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "category": {
+                                        "type": "string",
+                                        "example": "Samsung"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "category": {
+                                            "type": "string",
+                                            "example": "Samsung"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/category/{id}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Get Single Category",
+                "description": "Get Single Category",
+                "operationId": "b8bd0bcfe282e1094439a41dafffac7d",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "category": {
+                                            "type": "string",
+                                            "example": "Samsung"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/category/{Id}": {
+            "delete": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Delete Category by ID",
+                "description": "Delete a single Category",
+                "operationId": "38458dc55834936a9360112086eeb7e6",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplier"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
+        "/Customer": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Create customer",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "register",
+                "requestBody": {
+                    "description": "Create Customer object",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Customer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Customer"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Customer/login": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Login customer",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "Create Customer object",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "example@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "password": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/Customer/logout/{email}": {
+            "delete": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Logout customer",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "logout",
+                "parameters": [
+                    {
+                        "name": "Email",
+                        "in": "path",
+                        "description": "Email Customer",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/payment": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Create new payment",
+                "description": "Create a new payment",
+                "operationId": "c27325b9da1c231c0a1d34256ba14aa2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "product_id": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "product[0]": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "product[1]": {
+                                                    "type": "string",
+                                                    "example": "2"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "customer_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "quantity": {
+                                                "type": "string"
+                                            },
+                                            "price": {
+                                                "type": "string"
+                                            },
+                                            "payment_id": {
+                                                "type": "integer"
+                                            },
+                                            "product_id": {
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "payment_date": {
+                                                "type": "string",
+                                                "format": "date"
+                                            },
+                                            "customer_id": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": 1,
+                                        "quantity": 1,
+                                        "price": 3000000,
+                                        "payment_id": 2,
+                                        "product_id": 1,
+                                        "name": "Samsung A24",
+                                        "payment_date": "2024-05-22",
+                                        "customer_id": 1
+                                    },
+                                    {
+                                        "id": 2,
+                                        "quantity": 1,
+                                        "price": 30000000,
+                                        "payment_id": 2,
+                                        "product_id": 2,
+                                        "name": "Samsung S24",
+                                        "payment_date": "2024-05-22",
+                                        "customer_id": 1
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/payment/show/{Id}": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Show Order in Payment by ID",
+                "description": "Returns a single payment",
+                "operationId": "3ed516cb6865390c4277140276b6948b",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Payment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "data",
+                                    "type": "array",
+                                    "items": {
+                                        "title": "data[0]",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1"
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Samsung S24"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "samsung memiliki ....."
+                                            },
+                                            "price": {
+                                                "type": "integer",
+                                                "example": "34000000"
+                                            },
+                                            "stock": {
+                                                "type": "integer",
+                                                "example": "8"
+                                            },
+                                            "rate": {
+                                                "type": "integer",
+                                                "example": "5"
+                                            },
+                                            "category_id": {
+                                                "type": "integer",
+                                                "example": "1"
+                                            },
+                                            "quantity": {
+                                                "type": "integer"
+                                            },
+                                            "payment_id": {
+                                                "type": "integer"
+                                            },
+                                            "product_id": {
+                                                "type": "integer"
+                                            },
+                                            "payment_date": {
+                                                "type": "string",
+                                                "format": "date"
+                                            },
+                                            "amount": {
+                                                "type": "number",
+                                                "format": "double"
+                                            },
+                                            "token": {
+                                                "type": "string"
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "customer_id": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": "2",
+                                        "name": "Samsung S24",
+                                        "description": "Samsung S24 memiliki...",
+                                        "price": "4000000",
+                                        "stock": "10",
+                                        "rate": "4",
+                                        "category_id": "1",
+                                        "quantity": "1",
+                                        "payment_id": "1",
+                                        "product_id": "1",
+                                        "payment_date": "1",
+                                        "amount": "3000000",
+                                        "token": "62e86759-fb4d-4370-ac97-92b4a2ea7a1f",
+                                        "status": "Dikemas",
+                                        "customer_id": 1
+                                    },
+                                    {
+                                        "id": "2",
+                                        "name": "Samsung S23",
+                                        "description": "Samsung S23 memiliki...",
+                                        "price": "2800000",
+                                        "stock": "10",
+                                        "rate": "4",
+                                        "category_id": "1",
+                                        "quantity": "1",
+                                        "payment_id": "1",
+                                        "product_id": "2",
+                                        "payment_date": "1",
+                                        "amount": "3000000",
+                                        "token": "62e86759-fb4d-4370-ac97-92b4a2ea7a1f",
+                                        "status": "Dikemas",
+                                        "customer_id": 1
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplier"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
+        "/payment/{id}": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Show Payment by ID Customer",
+                "description": "Returns payment",
+                "operationId": "0c46412a113a011cc9e588372c7734b5",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Customer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "data",
+                                    "type": "array",
+                                    "items": {
+                                        "title": "data[0]",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1"
+                                            },
+                                            "payment_date": {
+                                                "type": "string",
+                                                "format": "date"
+                                            },
+                                            "amount": {
+                                                "type": "number",
+                                                "format": "double"
+                                            },
+                                            "token": {
+                                                "type": "string"
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "customer_id": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": 1,
+                                        "payment_date": "2024-05-20",
+                                        "amount": 68000000,
+                                        "token": "4565f927-267d-44a2-ae72-7f1bece4c70b",
+                                        "status": "Selesai",
+                                        "customer_id": 1
+                                    },
+                                    {
+                                        "id": 2,
+                                        "payment_date": "2024-05-22",
+                                        "amount": 3000000,
+                                        "token": "62e86759-fb4d-4370-ac97-92b4a2ea7a1f",
+                                        "status": "Dikemas",
+                                        "customer_id": 1
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplier"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
+        "/payment/cancelorder": {
+            "put": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Cancel payment",
+                "description": "Cancel payment",
+                "operationId": "0e1856b17408826daf481ed66e294812",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "customer_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "payment_date": {
+                                            "type": "string",
+                                            "format": "date"
+                                        },
+                                        "amount": {
+                                            "type": "number",
+                                            "format": "double"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "customer_id": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": [
+                                    {
+                                        "id": 2,
+                                        "payment_date": "2024-05-22",
+                                        "amount": 3000000,
+                                        "token": null,
+                                        "status": "Cancel Order",
+                                        "customer_id": 1
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/payment/updatebayar": {
+            "put": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Bayar payment",
+                "description": "Bayar payment",
+                "operationId": "44556643735a20e8faae393cd027593e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "customer_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "payment_date": {
+                                            "type": "string",
+                                            "format": "date"
+                                        },
+                                        "amount": {
+                                            "type": "number",
+                                            "format": "double"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "customer_id": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": [
+                                    {
+                                        "id": 2,
+                                        "payment_date": "2024-05-22",
+                                        "amount": 3000000,
+                                        "token": "62e86759-fb4d-4370-ac97-92b4a2ea7a1f",
+                                        "status": "Diterima",
+                                        "customer_id": 1
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/payment/updatekemas": {
+            "put": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Update Kemasan Order",
+                "description": "Update Kemasan Order",
+                "operationId": "c4758a5bd78d9faa59c7ec2450f83e30",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "customer_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "payment_date": {
+                                            "type": "string",
+                                            "format": "date"
+                                        },
+                                        "amount": {
+                                            "type": "number",
+                                            "format": "double"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "customer_id": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": [
+                                    {
+                                        "id": 2,
+                                        "payment_date": "2024-05-22",
+                                        "amount": 3000000,
+                                        "token": "62e86759-fb4d-4370-ac97-92b4a2ea7a1f",
+                                        "status": "Dikemas",
+                                        "customer_id": 1
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/payment/updatekirim": {
+            "put": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Update Kirim Order",
+                "description": "Update Kirim Order",
+                "operationId": "47033fb660f569705a31526f61cdcd3c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "customer_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "payment_date": {
+                                            "type": "string",
+                                            "format": "date"
+                                        },
+                                        "amount": {
+                                            "type": "number",
+                                            "format": "double"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "customer_id": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": [
+                                    {
+                                        "id": 2,
+                                        "payment_date": "2024-05-22",
+                                        "amount": 3000000,
+                                        "token": "62e86759-fb4d-4370-ac97-92b4a2ea7a1f",
+                                        "status": "Dikirim",
+                                        "customer_id": 1
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/payment/selesai": {
+            "put": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Update Selesai Order",
+                "description": "Update Selesai Order",
+                "operationId": "b254143af20eadc30e79e28087abff7f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "customer_id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "payment_date": {
+                                            "type": "string",
+                                            "format": "date"
+                                        },
+                                        "amount": {
+                                            "type": "number",
+                                            "format": "double"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "customer_id": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": [
+                                    {
+                                        "id": 2,
+                                        "payment_date": "2024-05-22",
+                                        "amount": 3000000,
+                                        "token": "62e86759-fb4d-4370-ac97-92b4a2ea7a1f",
+                                        "status": "Selesai",
+                                        "customer_id": 1
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/product": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Show All product",
+                "description": "Returns a all Product",
+                "operationId": "9ef30f13af377e0ffa86d375c21fc026",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "data",
+                                    "type": "array",
+                                    "items": {
+                                        "title": "data[0]",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1"
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Samsung S24"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "samsung memiliki ....."
+                                            },
+                                            "price": {
+                                                "type": "integer",
+                                                "example": "34000000"
+                                            },
+                                            "stock": {
+                                                "type": "integer",
+                                                "example": "8"
+                                            },
+                                            "rate": {
+                                                "type": "integer",
+                                                "example": "5"
+                                            },
+                                            "category_id": {
+                                                "type": "integer",
+                                                "example": "1"
+                                            },
+                                            "category": {
+                                                "type": "string",
+                                                "example": "Samsung"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": "1",
+                                        "name": "Samsung S24",
+                                        "description": "Samsung S24 memiliki...",
+                                        "price": "3000000",
+                                        "stock": "10",
+                                        "rate": "4",
+                                        "category_id": "1",
+                                        "category": "Samsung"
+                                    },
+                                    {
+                                        "id": "2",
+                                        "name": "Samsung S23",
+                                        "description": "Samsung S23 memiliki...",
+                                        "price": "2800000",
+                                        "stock": "10",
+                                        "rate": "4",
+                                        "category_id": "1",
+                                        "category": "Samsung"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Product not Found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Create new product",
+                "description": "Create a new product",
+                "operationId": "43e486f30b414a8d87814d4701a6e0e1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Samsung S24"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "samsung memiliki ....."
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": "34000000"
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": "8"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Samsung S24"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "samsung memiliki ....."
+                                        },
+                                        "price": {
+                                            "type": "integer",
+                                            "example": "34000000"
+                                        },
+                                        "stock": {
+                                            "type": "integer",
+                                            "example": "8"
+                                        },
+                                        "rate": {
+                                            "type": "integer",
+                                            "example": "null"
+                                        },
+                                        "category_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/product/{Id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Find Product by ID",
+                "description": "Returns a single product",
+                "operationId": "d8736cb64f6bbfdf1765691c2d5c4da5",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Samsung S24"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "samsung memiliki ....."
+                                        },
+                                        "price": {
+                                            "type": "integer",
+                                            "example": "34000000"
+                                        },
+                                        "stock": {
+                                            "type": "integer",
+                                            "example": "8"
+                                        },
+                                        "rate": {
+                                            "type": "integer",
+                                            "example": "5"
+                                        },
+                                        "category_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "category": {
+                                            "type": "string",
+                                            "example": "Samsung"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplier"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Delete Product by ID",
+                "description": "Delete a single product",
+                "operationId": "a29bafa1a3ac97c259a7003370ebfbc5",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id Product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplier"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
+        "/product/{id}": {
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update a product",
+                "description": "Returns updated product data",
+                "operationId": "0e409631b231751d093cfd6dab8da07d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id Product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Samsung S24"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "samsung memiliki ....."
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": "34000000"
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": "8"
+                                    },
+                                    "rate": {
+                                        "type": "integer",
+                                        "example": "5"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Samsung S24"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "samsung memiliki ....."
+                                        },
+                                        "price": {
+                                            "type": "integer",
+                                            "example": "34000000"
+                                        },
+                                        "stock": {
+                                            "type": "integer",
+                                            "example": "8"
+                                        },
+                                        "rate": {
+                                            "type": "integer",
+                                            "example": "5"
+                                        },
+                                        "category_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/product/category/{category}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Show Product by Category",
+                "description": "Show Product",
+                "operationId": "8cee8dd7ace36431bf5dc9c120506e38",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "data",
+                                    "type": "array",
+                                    "items": {
+                                        "title": "data[0]",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1"
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Samsung S24"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "samsung memiliki ....."
+                                            },
+                                            "price": {
+                                                "type": "integer",
+                                                "example": "34000000"
+                                            },
+                                            "stock": {
+                                                "type": "integer",
+                                                "example": "8"
+                                            },
+                                            "rate": {
+                                                "type": "integer",
+                                                "example": "5"
+                                            },
+                                            "category_id": {
+                                                "type": "integer",
+                                                "example": "1"
+                                            },
+                                            "category": {
+                                                "type": "string",
+                                                "example": "Samsung"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": "1",
+                                        "name": "Samsung S24",
+                                        "description": "Samsung S24 memiliki...",
+                                        "price": "3000000",
+                                        "stock": "10",
+                                        "rate": "4",
+                                        "category_id": "1",
+                                        "category": "Samsung"
+                                    },
+                                    {
+                                        "id": "2",
+                                        "name": "Samsung S23",
+                                        "description": "Samsung S23 memiliki...",
+                                        "price": "2800000",
+                                        "stock": "10",
+                                        "rate": "4",
+                                        "category_id": "1",
+                                        "category": "Samsung"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplier"
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        },
+        "/payment/rating": {
+            "post": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Create Rating for product",
+                "description": "Create Rating for product",
+                "operationId": "9fca0a5d9ab35939822d9a76df1f7ae3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "order_id": {
+                                        "type": "integer",
+                                        "example": "2"
+                                    },
+                                    "rate": {
+                                        "type": "integer",
+                                        "example": "5"
+                                    },
+                                    "customer_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "order_id": {
+                                            "type": "integer",
+                                            "example": "2"
+                                        },
+                                        "rate": {
+                                            "type": "integer",
+                                            "example": "5"
+                                        },
+                                        "customer_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Customer": {
+                "title": "User model",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "firstName": {
+                        "title": "First name",
+                        "description": "First name",
+                        "type": "string",
+                        "maximum": 100,
+                        "example": "Stephen"
+                    },
+                    "lastName": {
+                        "title": "Last name",
+                        "description": "Last name",
+                        "type": "string",
+                        "maximum": 100,
+                        "example": "Malik"
+                    },
+                    "email": {
+                        "title": "Email",
+                        "description": "Email",
+                        "type": "string",
+                        "format": "email",
+                        "maximum": 100,
+                        "example": "example@gmail.com"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "description": "Password",
+                        "type": "string",
+                        "format": "int64",
+                        "maximum": 255
+                    },
+                    "phone": {
+                        "title": "Phone",
+                        "description": "Phone",
+                        "type": "string",
+                        "format": "msisdn",
+                        "example": "0895620108861"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "requestBodies": {
+            "UserArray": {
+                "description": "List of user object",
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Customer"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

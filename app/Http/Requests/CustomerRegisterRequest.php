@@ -6,6 +6,17 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
+/**
+ * @OA\RequestBody(
+ *     request="UserArray",
+ *     description="List of user object",
+ *     required=true,
+ *     @OA\JsonContent(
+ *         type="array",
+ *         @OA\Items(ref="#/components/schemas/Customer")
+ *     )
+ * )
+ */
 class CustomerRegisterRequest extends FormRequest
 {
     /**

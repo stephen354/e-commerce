@@ -11,6 +11,35 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CategoryController extends Controller
 {
+    /**
+     * @OA\Post(
+     *      path="/category",
+     *      tags={"Category"},
+     *      summary="Create new category",
+     *      description="Create a new category",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="category", type="string",example="Samsung"),
+     *           )
+     *         
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *             @OA\Property(property="id", type="string", example="1"),
+     *              @OA\Property(property="category", type="string",example="Samsung"),
+     *           )
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     * )
+     **/
     public function create(CategoryCreateRequest $request)
     {
         $data = $request->validated();
@@ -20,31 +49,178 @@ class CategoryController extends Controller
 
         return $this->success($category);
     }
-
+    /**
+     * @OA\Get(
+     *      path="/category",
+     *      tags={"Category"},
+     *      summary="Show list category",
+     *      description="Show list category",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="array",
+     *              title="data",
+     *              example={{
+     *                  "id":"1",
+     *                  "category":"Samsung" 
+     *              },
+     *              {
+     *                  "id":"2",
+     *                  "category":"oppo" 
+     *              }
+     * 
+     *              }  ,
+     *               @OA\Items(
+     *              type="object",
+     *              title="data[0]",
+     *              @OA\Property(property="id", type="string", example="1"),
+     *              @OA\Property(property="category", type="string",example="Samsung"),     
+     * 
+     *              )
+     * 
+     *           )
+     *         
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              title="data",
+     *               @OA\Items(
+     *              type="object",
+     *              title="data[0]",
+     *              @OA\Property(property="id", type="string", example="1"),
+     *              @OA\Property(property="category", type="string",example="Samsung"),     
+     * 
+     *              )
+     * 
+     *           )
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     * )
+     **/
     public function show()
     {
         $category = Category::query()->get();
         $this->CategoryNotFound($category);
         return $category;
     }
+    /**
+     * @OA\Get(
+     *      path="/category/{id}",
+     *      tags={"Category"},
+     *      summary="Get Single Category",
+     *      description="Get Single Category",
+     *     @OA\Parameter(
+     *         name="Id",
+     *         in="path",
+     *         description="Id Category",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *             @OA\Property(property="id", type="string", example="1"),
+     *              @OA\Property(property="category", type="string",example="Samsung"),
+     *           )
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     * )
+     **/
     public function get(int $id)
     {
         $category = Category::where('id', $id)->first();
         $this->CategoryNotFound($category);
         return $category;
     }
-    public function update(int $id, CategoryUpdateRequest $request)
+    /**
+     * @OA\Put(
+     *      path="/category",
+     *      tags={"Category"},
+     *      summary="Update category",
+     *      description="Update a new category",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="id", type="string", example="1"),
+     *              @OA\Property(property="category", type="string",example="Samsung"),
+     *           )
+     *         
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *             @OA\Property(property="id", type="string", example="1"),
+     *              @OA\Property(property="category", type="string",example="Samsung"),
+     *           )
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     * )
+     **/
+    public function update(CategoryUpdateRequest $request)
     {
-        $category = Category::where('id', $id)->first();
-        $this->CategoryNotFound($category);
+
         $data = $request->validated();
+        $category = Category::where('id', $data['id'])->first();
+        $this->CategoryNotFound($category);
         $this->responseCategoryAlready($data);
         $category->fill($data);
         $category->save();
 
         return $this->success($category);
     }
-
+    /** 
+     * @param int $id
+     * @OA\Delete(
+     *     path="/category/{Id}",
+     *     tags={"Category"},
+     *     summary="Delete Category by ID",
+     *     description="Delete a single Category",
+     *     @OA\Parameter(
+     *         name="Id",
+     *         in="path",
+     *         description="Id Category",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="data", type="boolean", example=true),
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid ID supplier"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Product not found"
+     *     ),
+     * )
+     * */
     public function delete(int $id)
     {
         $category = Category::where('id', $id)->first();

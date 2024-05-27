@@ -14,9 +14,43 @@ use Illuminate\Support\Facades\DB;
 
 class RatingController extends Controller
 {
+
+    /**
+     * @OA\Post(
+     *      path="/payment/rating",
+     *      tags={"Payment"},
+     *      summary="Create Rating for product",
+     *      description="Create Rating for product",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="order_id", type="int",example="2"),
+     *              @OA\Property(property="rate", type="int",example="5"),
+     *              @OA\Property(property="customer_id", type="int", example="1"),
+     *           )
+     *         
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="id", type="string", example="1"),
+     *              @OA\Property(property="order_id", type="int",example="2"),
+     *              @OA\Property(property="rate", type="int",example="5"),
+     *              @OA\Property(property="customer_id", type="int", example="1"),
+     *           )
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     * )
+     **/
     public function create(RatingCreateRequest $request)
     {
-        Auth::user();
+
         $data = $request->validated();
         // cek data
         $cekRating = Rating::where('customer_id', $data['customer_id'])->where('order_id', $data['order_id'])->count();

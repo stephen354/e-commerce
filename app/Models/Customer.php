@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+
+/**
+ * Class Customer.
+ *
+ * @author  Donii Sergii <doniysa@gmail.com>
+ *
+ * @OA\Schema(
+ *     title="User model",
+ *     description="User model",
+ * )
+ */
 class Customer extends Model implements Authenticatable
 {
     protected $table = "customer";
@@ -14,6 +25,81 @@ class Customer extends Model implements Authenticatable
     protected $keyType = "int";
     public $timestamps = true;
     public $incrementing = true;
+
+    /**
+     * @OA\Property(
+     *     format="int64",
+     *     description="ID",
+     *     title="ID",
+     *     example=1,
+     * )
+     *
+     * @var int
+     */
+    private $id;
+
+
+    /**
+     * @OA\Property(
+     *     description="First name",
+     *     title="First name",
+     *     maximum=100,
+     *      example="Stephen"
+     * )
+     *
+     * @var string
+     */
+    private $firstName;
+
+    /**
+     * @OA\Property(
+     *     description="Last name",
+     *     title="Last name",
+     *     maximum=100,
+     *      example="Malik"
+     * )
+     *
+     * @var string
+     */
+    private $lastName;
+
+    /**
+     * @OA\Property(
+     *     format="email",
+     *     description="Email",
+     *     title="Email",
+     *     maximum=100,
+     *     example="example@gmail.com"
+     * )
+     *
+     * @var string
+     */
+    private $email;
+
+    /**
+     * @OA\Property(
+     *     format="int64",
+     *     description="Password",
+     *     title="Password",
+     *     maximum=255
+     * )
+     *
+     * @var string
+     */
+    private $password;
+
+    /**
+     * @OA\Property(
+     *     format="msisdn",
+     *     description="Phone",
+     *     title="Phone",
+     *     example="0895620108861"
+     * )
+     *
+     * @var string
+     */
+    private $phone;
+
 
     protected $fillable = [
         'first_name',

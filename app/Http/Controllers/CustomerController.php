@@ -19,6 +19,24 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Post(
+     *     path="/Customer",
+     *     tags={"Customer"},
+     *     summary="Create customer",
+     *     description="This can only be done by the logged in user.",
+     *     operationId="register",
+     *     @OA\Response(
+     *         response="200",
+     *         description="successful operation",
+     *         @OA\JsonContent(ref="#/components/schemas/Customer")
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Create Customer object",
+     *         @OA\JsonContent(ref="#/components/schemas/Customer")
+     *     )
+     * )
+     */
     public function register(CustomerRegisterRequest $request)
     {
         $data = $request->validated();
@@ -39,6 +57,35 @@ class CustomerController extends Controller
 
         return $this->success($customer);
     }
+
+    /**
+     * @OA\Post(
+     *     path="/Customer/login",
+     *     tags={"Customer"},
+     *     summary="Login customer",
+     *     description="This can only be done by the logged in user.",
+     *     operationId="login",
+     *  
+     *     @OA\Response(
+     *         response="201",
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="email", type="string"),
+     *              @OA\Property(property="password", type="string")
+     *          )
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Create Customer object",
+     *         @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="email", type="string", example="example@gmail.com"),
+     *              @OA\Property(property="password", type="string")
+     *          )
+     *     )
+     * )
+     */
+
     public function login(CustomerLoginRequest $request)
     {
         $data = $request->validated();
@@ -59,12 +106,36 @@ class CustomerController extends Controller
         return $this->success($customer);
     }
 
-    public function logout()
-    {
-        $customer = Auth::user();
-        $customer->token_login = null;
+    /**
+     * @OA\Delete(
+     *     path="/Customer/logout/{email}",
+     *     tags={"Customer"},
+     *     summary="Logout customer",
+     *     description="This can only be done by the logged in user.",
+     *     operationId="logout",
+     *    @OA\Parameter(
+     *         name="Email",
+     *         in="path",
+     *         description="Email Customer",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="data", type="boolean", example=true),
+     *          )
+     *     ),
+     * )
+     */
 
-        $user_data = Customer::where('email', $customer->email)->first();
+    public function logout($email)
+    {
+        $user_data = Customer::where('email', $email)->first();
         $user_data['token_login'] = null;
         $user_data->save();
 

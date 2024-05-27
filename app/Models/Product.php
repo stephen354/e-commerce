@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+
 class Product extends Model
 {
     protected $table = "product";
@@ -14,6 +15,9 @@ class Product extends Model
     protected $keyType = "int";
     public $timestamps = true;
     public $incrementing = true;
+
+
+
 
     protected $fillable = [
         'name',

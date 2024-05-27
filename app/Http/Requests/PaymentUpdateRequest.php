@@ -23,7 +23,7 @@ class PaymentUpdateRequest extends FormRequest
     {
         return [
             'id' => ['required', 'integer'],
-            'customer_id' => ['nullable']
+            'customer_id' => ['required']
         ];
     }
 }
