@@ -22,7 +22,7 @@ class PaymentController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/payment",
+     *      path="/api/payment",
      *      tags={"Payment"},
      *      summary="Create new payment",
      *      description="Create a new payment",
@@ -151,7 +151,7 @@ class PaymentController extends Controller
         $payment = Payment::where('id', $id)->first();
         $payment->delete();
     }
-    //payment all order
+    //api/payment all order
     private function show(int $id)
     {
 
@@ -168,7 +168,7 @@ class PaymentController extends Controller
     /** 
      * @param int $id
      * @OA\Get(
-     *     path="/payment/show/{Id}",
+     *     path="/api/payment/show/{Id}",
      *     tags={"Payment"},
      *     summary="Show Order in Payment by ID",
      *     description="Returns a single payment",
@@ -269,7 +269,7 @@ class PaymentController extends Controller
     /** 
      * @param int $id
      * @OA\Get(
-     *     path="/payment/{id}",
+     *     path="/api/payment/{id}",
      *     tags={"Payment"},
      *     summary="Show Payment by ID Customer",
      *     description="Returns payment",
@@ -337,7 +337,7 @@ class PaymentController extends Controller
     }
     /**
      * @OA\Put(
-     *      path="/payment/cancelorder",
+     *      path="/api/payment/cancelorder",
      *      tags={"Payment"},
      *      summary="Cancel payment",
      *      description="Cancel payment",
@@ -399,7 +399,7 @@ class PaymentController extends Controller
 
     /**
      * @OA\Put(
-     *      path="/payment/updatebayar",
+     *      path="/api/payment/updatebayar",
      *      tags={"Payment"},
      *      summary="Bayar payment",
      *      description="Bayar payment",
@@ -505,7 +505,7 @@ class PaymentController extends Controller
 
     /**
      * @OA\Put(
-     *      path="/payment/updatekemas",
+     *      path="/api/payment/updatekemas",
      *      tags={"Payment"},
      *      summary="Update Kemasan Order",
      *      description="Update Kemasan Order",
@@ -567,7 +567,7 @@ class PaymentController extends Controller
 
     /**
      * @OA\Put(
-     *      path="/payment/updatekirim",
+     *      path="/api/payment/updatekirim",
      *      tags={"Payment"},
      *      summary="Update Kirim Order",
      *      description="Update Kirim Order",
@@ -628,7 +628,7 @@ class PaymentController extends Controller
     }
     /**
      * @OA\Put(
-     *      path="/payment/selesai",
+     *      path="/api/payment/selesai",
      *      tags={"Payment"},
      *      summary="Update Selesai Order",
      *      description="Update Selesai Order",

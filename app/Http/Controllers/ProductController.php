@@ -18,7 +18,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/product",
+     *      path="/api/product",
      *      tags={"Product"},
      *      summary="Create new product",
      *      description="Create a new product",
@@ -58,8 +58,8 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
-        $id = Category::where('category', $data['category_id'])->first();
-        $data['category_id'] = $id->id;
+        // $id = Category::where('category', $data['category_id'])->first();
+        // $data['category_id'] = $id->id;
         $product = new Product($data);
         $product->save();
 
@@ -68,7 +68,7 @@ class ProductController extends Controller
     /** 
      * @param int $id
      * @OA\Get(
-     *     path="/product",
+     *     path="/api/product",
      *     tags={"Product"},
      *     summary="Show All product",
      *     description="Returns a all Product",
@@ -145,7 +145,7 @@ class ProductController extends Controller
     /** 
      * @param int $id
      * @OA\Get(
-     *     path="/product/{Id}",
+     *     path="/api/product/{Id}",
      *     tags={"Product"},
      *     summary="Find Product by ID",
      *     description="Returns a single product",
@@ -195,7 +195,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Put(
-     *      path="/product/{id}",
+     *      path="/api/product/{id}",
      *      tags={"Product"},
      *      summary="Update a product",
      *      description="Returns updated product data",
@@ -265,7 +265,7 @@ class ProductController extends Controller
     /** 
      * @param int $id
      * @OA\Delete(
-     *     path="/product/{Id}",
+     *     path="/api/product/{Id}",
      *     tags={"Product"},
      *     summary="Delete Product by ID",
      *     description="Delete a single product",
@@ -314,7 +314,7 @@ class ProductController extends Controller
     /** 
      * 
      * @OA\Get(
-     *     path="/product/category/{category}",
+     *     path="/api/product/category/{category}",
      *     tags={"Product"},
      *     summary="Show Product by Category",
      *     description="Show Product",

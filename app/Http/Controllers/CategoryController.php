@@ -13,7 +13,7 @@ class CategoryController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/category",
+     *      path="/api/category",
      *      tags={"Category"},
      *      summary="Create new category",
      *      description="Create a new category",
@@ -51,7 +51,7 @@ class CategoryController extends Controller
     }
     /**
      * @OA\Get(
-     *      path="/category",
+     *      path="/api/category",
      *      tags={"Category"},
      *      summary="Show list category",
      *      description="Show list category",
@@ -111,7 +111,7 @@ class CategoryController extends Controller
     }
     /**
      * @OA\Get(
-     *      path="/category/{id}",
+     *      path="/api/category/{id}",
      *      tags={"Category"},
      *      summary="Get Single Category",
      *      description="Get Single Category",
@@ -147,7 +147,7 @@ class CategoryController extends Controller
     }
     /**
      * @OA\Put(
-     *      path="/category",
+     *      path="/api/category",
      *      tags={"Category"},
      *      summary="Update category",
      *      description="Update a new category",
@@ -190,7 +190,7 @@ class CategoryController extends Controller
     /** 
      * @param int $id
      * @OA\Delete(
-     *     path="/category/{Id}",
+     *     path="/api/category/{Id}",
      *     tags={"Category"},
      *     summary="Delete Category by ID",
      *     description="Delete a single Category",

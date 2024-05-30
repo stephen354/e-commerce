@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Class Customer.
@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *     description="User model",
  * )
  */
-class Customer extends Model implements Authenticatable
+class Customer extends Model implements Authenticatable, JWTSubject
 {
     protected $table = "customer";
     protected $primaryKey = "id";
@@ -36,7 +36,7 @@ class Customer extends Model implements Authenticatable
      *
      * @var int
      */
-    private $id;
+
 
 
     /**
@@ -49,7 +49,7 @@ class Customer extends Model implements Authenticatable
      *
      * @var string
      */
-    private $firstName;
+
 
     /**
      * @OA\Property(
@@ -61,7 +61,7 @@ class Customer extends Model implements Authenticatable
      *
      * @var string
      */
-    private $lastName;
+
 
     /**
      * @OA\Property(
@@ -74,7 +74,7 @@ class Customer extends Model implements Authenticatable
      *
      * @var string
      */
-    private $email;
+
 
     /**
      * @OA\Property(
@@ -86,7 +86,7 @@ class Customer extends Model implements Authenticatable
      *
      * @var string
      */
-    private $password;
+
 
     /**
      * @OA\Property(
@@ -98,7 +98,7 @@ class Customer extends Model implements Authenticatable
      *
      * @var string
      */
-    private $phone;
+
 
 
     protected $fillable = [
@@ -108,6 +108,10 @@ class Customer extends Model implements Authenticatable
         'password',
         'address',
         'phone'
+    ];
+    protected $casts = [
+
+        'password' => 'hashed',
     ];
 
     public function cart(): HasMany
@@ -177,5 +181,19 @@ class Customer extends Model implements Authenticatable
     public function getRememberTokenName()
     {
         return "token_login";
+    }
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

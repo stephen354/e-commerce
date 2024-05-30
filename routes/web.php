@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Middleware\ApiAuthMiddleware;
+use App\Http\Middleware\LoginMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login', function () {
+    return view('index');
+});
+
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+
+
+Route::post('actionlogin', [AuthController::class, 'login'])->name('actionlogin');

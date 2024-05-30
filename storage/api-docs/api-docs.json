@@ -16,14 +16,14 @@
         }
     },
     "paths": {
-        "/cart": {
+        "/api/cart": {
             "post": {
                 "tags": [
                     "Cart"
                 ],
                 "summary": "Create new Product in cart",
                 "description": "Create new Product in cart",
-                "operationId": "01e496f11ad9aa4e64b259bf4ae7e41d",
+                "operationId": "ba73c99e1f1e984d670c8f11ee9353dd",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -83,14 +83,14 @@
                 }
             }
         },
-        "/cart/product/{Id}": {
+        "/api/cart/product/{Id}": {
             "get": {
                 "tags": [
                     "Cart"
                 ],
                 "summary": "Find Product in cart by ID",
                 "description": "Returns a single product",
-                "operationId": "85dec63deef1576c54c43259ed7dd98e",
+                "operationId": "34b82b5d7a493d5d9d91b8665c73016b",
                 "parameters": [
                     {
                         "name": "Id",
@@ -160,14 +160,14 @@
                 }
             }
         },
-        "/cart/{Id}": {
+        "/api/cart/{Id}": {
             "get": {
                 "tags": [
                     "Cart"
                 ],
                 "summary": "Show Product in Cart by Customer",
                 "description": "Show Product in Cart by Customer",
-                "operationId": "b0842247d9ef48e768d7c01a29fd57c2",
+                "operationId": "61cb087a0c8383ea1013678744b45198",
                 "parameters": [
                     {
                         "name": "Id",
@@ -271,7 +271,7 @@
                 ],
                 "summary": "Delete Product in Cart by ID",
                 "description": "Delete a single product",
-                "operationId": "d3ae644f6a55e929e66706ac00769fc5",
+                "operationId": "28c933a83894161134694bf0550db441",
                 "parameters": [
                     {
                         "name": "Id",
@@ -309,14 +309,14 @@
                 }
             }
         },
-        "/category": {
+        "/api/category": {
             "get": {
                 "tags": [
                     "Category"
                 ],
                 "summary": "Show list category",
                 "description": "Show list category",
-                "operationId": "a334a25403599785bfcd67ca446e9185",
+                "operationId": "b5fa13e705df7864d42942845ba7fc1d",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -389,7 +389,7 @@
                 ],
                 "summary": "Update category",
                 "description": "Update a new category",
-                "operationId": "5b5f8d2ec9d116166282eb5156ee887a",
+                "operationId": "0accddddf5fce22e02477a41a89cf341",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -442,7 +442,7 @@
                 ],
                 "summary": "Create new category",
                 "description": "Create a new category",
-                "operationId": "9311e3da298714caf0fbfcd074cb2287",
+                "operationId": "75c388e2c6bd800c115e7884d915a82f",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -486,14 +486,14 @@
                 }
             }
         },
-        "/category/{id}": {
+        "/api/category/{id}": {
             "get": {
                 "tags": [
                     "Category"
                 ],
                 "summary": "Get Single Category",
                 "description": "Get Single Category",
-                "operationId": "b8bd0bcfe282e1094439a41dafffac7d",
+                "operationId": "a1381cbacaa9c610406c53ed6aa6a343",
                 "parameters": [
                     {
                         "name": "Id",
@@ -532,14 +532,14 @@
                 }
             }
         },
-        "/category/{Id}": {
+        "/api/category/{Id}": {
             "delete": {
                 "tags": [
                     "Category"
                 ],
                 "summary": "Delete Category by ID",
                 "description": "Delete a single Category",
-                "operationId": "38458dc55834936a9360112086eeb7e6",
+                "operationId": "83975f02297980ba5d10292f42c50c3f",
                 "parameters": [
                     {
                         "name": "Id",
@@ -577,7 +577,7 @@
                 }
             }
         },
-        "/Customer": {
+        "/api/customer": {
             "post": {
                 "tags": [
                     "Customer"
@@ -590,7 +590,27 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Customer"
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -601,7 +621,27 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Customer"
+                                    "properties": {
+                                        "first_name": {
+                                            "type": "string"
+                                        },
+                                        "last_name": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "password": {
+                                            "type": "string"
+                                        },
+                                        "address": {
+                                            "type": "string"
+                                        },
+                                        "phone": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -609,7 +649,7 @@
                 }
             }
         },
-        "/Customer/login": {
+        "/api/customer/login": {
             "post": {
                 "tags": [
                     "Customer"
@@ -658,7 +698,7 @@
                 }
             }
         },
-        "/Customer/logout/{email}": {
+        "/api/customer/logout/{email}": {
             "delete": {
                 "tags": [
                     "Customer"
@@ -697,14 +737,14 @@
                 }
             }
         },
-        "/payment": {
+        "/api/payment": {
             "post": {
                 "tags": [
                     "Payment"
                 ],
                 "summary": "Create new payment",
                 "description": "Create a new payment",
-                "operationId": "c27325b9da1c231c0a1d34256ba14aa2",
+                "operationId": "3bf87a1d2db6171310016de0615a4707",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -806,14 +846,14 @@
                 }
             }
         },
-        "/payment/show/{Id}": {
+        "/api/payment/show/{Id}": {
             "get": {
                 "tags": [
                     "Payment"
                 ],
                 "summary": "Show Order in Payment by ID",
                 "description": "Returns a single payment",
-                "operationId": "3ed516cb6865390c4277140276b6948b",
+                "operationId": "adf8d6bb234d31e660d52c971ef2b758",
                 "parameters": [
                     {
                         "name": "Id",
@@ -942,14 +982,14 @@
                 }
             }
         },
-        "/payment/{id}": {
+        "/api/payment/{id}": {
             "get": {
                 "tags": [
                     "Payment"
                 ],
                 "summary": "Show Payment by ID Customer",
                 "description": "Returns payment",
-                "operationId": "0c46412a113a011cc9e588372c7734b5",
+                "operationId": "5a849080231daad7b44bac338e1e04be",
                 "parameters": [
                     {
                         "name": "Id",
@@ -1027,14 +1067,14 @@
                 }
             }
         },
-        "/payment/cancelorder": {
+        "/api/payment/cancelorder": {
             "put": {
                 "tags": [
                     "Payment"
                 ],
                 "summary": "Cancel payment",
                 "description": "Cancel payment",
-                "operationId": "0e1856b17408826daf481ed66e294812",
+                "operationId": "6e10090dd0e20914032a652df1ab5bf1",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1103,14 +1143,14 @@
                 }
             }
         },
-        "/payment/updatebayar": {
+        "/api/payment/updatebayar": {
             "put": {
                 "tags": [
                     "Payment"
                 ],
                 "summary": "Bayar payment",
                 "description": "Bayar payment",
-                "operationId": "44556643735a20e8faae393cd027593e",
+                "operationId": "d37d5f91895853192eae7553d26b4ed0",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1179,14 +1219,14 @@
                 }
             }
         },
-        "/payment/updatekemas": {
+        "/api/payment/updatekemas": {
             "put": {
                 "tags": [
                     "Payment"
                 ],
                 "summary": "Update Kemasan Order",
                 "description": "Update Kemasan Order",
-                "operationId": "c4758a5bd78d9faa59c7ec2450f83e30",
+                "operationId": "533ea099bd6db1ecc7ed771d650cf736",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1255,14 +1295,14 @@
                 }
             }
         },
-        "/payment/updatekirim": {
+        "/api/payment/updatekirim": {
             "put": {
                 "tags": [
                     "Payment"
                 ],
                 "summary": "Update Kirim Order",
                 "description": "Update Kirim Order",
-                "operationId": "47033fb660f569705a31526f61cdcd3c",
+                "operationId": "79cd5e66cee318003b9f7e217c47294b",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1331,14 +1371,14 @@
                 }
             }
         },
-        "/payment/selesai": {
+        "/api/payment/selesai": {
             "put": {
                 "tags": [
                     "Payment"
                 ],
                 "summary": "Update Selesai Order",
                 "description": "Update Selesai Order",
-                "operationId": "b254143af20eadc30e79e28087abff7f",
+                "operationId": "324637de6ab4ad3f469a5ee8d8505e81",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1407,14 +1447,14 @@
                 }
             }
         },
-        "/product": {
+        "/api/product": {
             "get": {
                 "tags": [
                     "Product"
                 ],
                 "summary": "Show All product",
                 "description": "Returns a all Product",
-                "operationId": "9ef30f13af377e0ffa86d375c21fc026",
+                "operationId": "be77b9897465d0527c2d85bc9cef84f9",
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1511,7 +1551,7 @@
                 ],
                 "summary": "Create new product",
                 "description": "Create a new product",
-                "operationId": "43e486f30b414a8d87814d4701a6e0e1",
+                "operationId": "a2a748b2864d35d1e50976b938ba8cd9",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1591,14 +1631,14 @@
                 }
             }
         },
-        "/product/{Id}": {
+        "/api/product/{Id}": {
             "get": {
                 "tags": [
                     "Product"
                 ],
                 "summary": "Find Product by ID",
                 "description": "Returns a single product",
-                "operationId": "d8736cb64f6bbfdf1765691c2d5c4da5",
+                "operationId": "3a9c6bb5e73d3518eac56cee12301a56",
                 "parameters": [
                     {
                         "name": "Id",
@@ -1669,7 +1709,7 @@
                 ],
                 "summary": "Delete Product by ID",
                 "description": "Delete a single product",
-                "operationId": "a29bafa1a3ac97c259a7003370ebfbc5",
+                "operationId": "64671fca2ad1591c7ab3e0ee093ac402",
                 "parameters": [
                     {
                         "name": "Id",
@@ -1707,14 +1747,14 @@
                 }
             }
         },
-        "/product/{id}": {
+        "/api/product/{id}": {
             "put": {
                 "tags": [
                     "Product"
                 ],
                 "summary": "Update a product",
                 "description": "Returns updated product data",
-                "operationId": "0e409631b231751d093cfd6dab8da07d",
+                "operationId": "d3467c795490afbb49680821c9bd6b0d",
                 "parameters": [
                     {
                         "name": "id",
@@ -1819,14 +1859,14 @@
                 }
             }
         },
-        "/product/category/{category}": {
+        "/api/product/category/{category}": {
             "get": {
                 "tags": [
                     "Product"
                 ],
                 "summary": "Show Product by Category",
                 "description": "Show Product",
-                "operationId": "8cee8dd7ace36431bf5dc9c120506e38",
+                "operationId": "6ac57ef6cad524d178bbf9d83898f671",
                 "parameters": [
                     {
                         "name": "category",
@@ -1919,14 +1959,14 @@
                 }
             }
         },
-        "/payment/rating": {
+        "api/payment/rating": {
             "post": {
                 "tags": [
                     "Payment"
                 ],
                 "summary": "Create Rating for product",
                 "description": "Create Rating for product",
-                "operationId": "9fca0a5d9ab35939822d9a76df1f7ae3",
+                "operationId": "c0f9ee1a8ebfb8b76f139d93142bf504",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1993,43 +2033,7 @@
                 "title": "User model",
                 "description": "User model",
                 "properties": {
-                    "id": {
-                        "title": "ID",
-                        "description": "ID",
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 1
-                    },
-                    "firstName": {
-                        "title": "First name",
-                        "description": "First name",
-                        "type": "string",
-                        "maximum": 100,
-                        "example": "Stephen"
-                    },
-                    "lastName": {
-                        "title": "Last name",
-                        "description": "Last name",
-                        "type": "string",
-                        "maximum": 100,
-                        "example": "Malik"
-                    },
-                    "email": {
-                        "title": "Email",
-                        "description": "Email",
-                        "type": "string",
-                        "format": "email",
-                        "maximum": 100,
-                        "example": "example@gmail.com"
-                    },
-                    "password": {
-                        "title": "Password",
-                        "description": "Password",
-                        "type": "string",
-                        "format": "int64",
-                        "maximum": 255
-                    },
-                    "phone": {
+                    "fillable": {
                         "title": "Phone",
                         "description": "Phone",
                         "type": "string",

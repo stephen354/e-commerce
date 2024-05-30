@@ -7,15 +7,17 @@ use App\Models\Cart;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
 use App\Models\Product;
+
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/cart",
+     *      path="/api/cart",
      *      tags={"Cart"},
      *      summary="Create new Product in cart",
      *      description="Create new Product in cart",
@@ -68,7 +70,7 @@ class CartController extends Controller
     /** 
      * @param int $id
      * @OA\Get(
-     *     path="/cart/product/{Id}",
+     *     path="/api/cart/product/{Id}",
      *     tags={"Cart"},
      *     summary="Find Product in cart by ID",
      *     description="Returns a single product",
@@ -130,7 +132,7 @@ class CartController extends Controller
     /** 
      * @param int $id
      * @OA\Delete(
-     *     path="/cart/{Id}",
+     *     path="/api/cart/{Id}",
      *     tags={"Cart"},
      *     summary="Delete Product in Cart by ID",
      *     description="Delete a single product",
@@ -174,7 +176,7 @@ class CartController extends Controller
     /** 
      * @param int $id
      * @OA\Get(
-     *     path="/cart/{Id}",
+     *     path="/api/cart/{Id}",
      *     tags={"Cart"},
      *     summary="Show Product in Cart by Customer",
      *     description="Show Product in Cart by Customer",

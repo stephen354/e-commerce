@@ -17,7 +17,7 @@ class RatingController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/payment/rating",
+     *      path="api/payment/rating",
      *      tags={"Payment"},
      *      summary="Create Rating for product",
      *      description="Create Rating for product",

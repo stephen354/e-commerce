@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,8 +29,11 @@
 </head>
 
 <body>
-<div id="swagger-ui"></div>
+    
 
+
+<div id="swagger-ui"></div>
+<div><a href="{{ route('logout') }}">Logout</a></div>
 <script src="{{ l5_swagger_asset($documentation, 'swagger-ui-bundle.js') }}"></script>
 <script src="{{ l5_swagger_asset($documentation, 'swagger-ui-standalone-preset.js') }}"></script>
 <script>
@@ -45,6 +49,7 @@
 
             requestInterceptor: function(request) {
                 request.headers['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
+                request.headers['Authorization'] = '{{ Session::get('token') }}';
                 return request;
             },
 
